@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY BIRTHDAY</title>
+</head>
+<style>
+   * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    
+    }
+
+    body {
+        color:rgb(51, 53, 54);
+        background-color:rgb(255, 255, 255);
+        font-family:Arial, Helvetica, sans-serif;
+        font-style:normal;
+        overflow:hidden;
+        font: weight 500px;
+        font-optical-sizing: auto;
+    }
+
+    .box-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .firework_btn {
+        position: absolute;
+        top: 56%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px 10px;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+    }
+
+    .firework_btn:hover {
+        transform: translate(-50%, -50%) scale(1.2);
+        animation: firework_btn_animation 0.5s ease-in-out forwards;
+    
+    }
+
+    @keyframes firework_btn_animation {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        25% {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+    }
+    
+
+    .sentence_text {
+        font-size: 15px;
+        font-weight: 500;
+        color: rgb(51, 53, 54);
+        margin-top: 7px;
+    }
+    
+    section {
+        position: relative;
+        width: 100%;
+        height: 90vh;
+        overflow: hidden;
+    }
+
+    #petal-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .petal {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: rgb(247, 208, 215);
+        border-radius: 0 40px;
+        animation: fall linear infinite;
+        cursor: pointer;
+        top: -50px;
+        opacity: 0.8;
+        transform: rotate(45deg);
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+        100% {
+            transform: translateY(110vh) rotate(360deg);
+        }
+    }
+
+    @keyframes slide-up {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .click_text {
+        font-size: 12px;
+        font-weight: 500;
+        color: rgb(184, 148, 163);
+        margin-top: 7px;
+        animation: fadeIn 3s ease-in-out;
+        transform: translateY(45px);
+        opacity: 0;
+        font-style: italic;
+        font-family: a href="https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2";
+    }
+
+    @keyframes red-color-animation {
+        0% {
+            opacity:0;
+        }
+        100% {
+            opacity:1;
+        }
+        
+    }
+
+    .red-color {
+        animation: red-color-animation 2s infinite alternate;
+    }
+    </style>
+<body>
+    <section>
+        <div id="petal-container"></div>
+        <div class="box-text">
+            <h1 class="congratul_text">생일 축하해</h1>
+            <p class="sentence_text">HAPPY BIRTHDAY!</p>
+            <p class="click_text">Click The Firecracker</p>
+        </div>
+        <button class="firework_btn">🎉</button>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        const container = document.getElementById('petal-container');
+        const button = document.querySelector('.firework_btn');
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            container.appendChild(petal);
+
+            petal.style.left = Math.random() * window.innerWidth + 'px';
+            petal.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            petal.style.opacity = String(Math.random() * 0.5 + 0.5);
+            petal.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+
+            setTimeout(() => {
+                petal.remove();
+            }, 5000);
+        }
+
+        setInterval(createPetal, 300);
+
+        button.addEventListener('click', () => {
+            confetti({
+                particleCount: 100,
+                spread: 120,
+                origin: { y: 0.53 },
+                startVelocity: 45,
+                ticks: 60,
+            });
+        });
+
+        const clickText = document.querySelector(".click_text");
+
+        setInterval(function() {
+            clickText.classList.toggle("red-color", { behavior: 'smooth' });
+        }, 300);
+
+        const fireworkBtn = document.querySelector('.firework_btn');
+        </script>
+</body>
+</html>
